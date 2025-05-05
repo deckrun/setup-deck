@@ -1,0 +1,19 @@
+name: 'GitHub Action for Deckrun - deck'
+description: 'Use deck to manage your Deckrun resources.'
+author: 'Daniel Vigueras <daniel@deckrun.com>'
+branding:
+  icon: 'upload-cloud'
+  color: 'purple'
+inputs:
+  version:
+    description: 'Version of deck to install'
+    default: 'latest'
+  no_auth:
+    description: 'Skip authentication'
+    default: 'false'
+  token:
+    description: 'Deckrun API Token'
+    default: ''
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
