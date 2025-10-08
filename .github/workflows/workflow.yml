@@ -34,6 +34,11 @@ jobs:
           token: ${{ secrets.DECKRUN_API_TOKEN }}
           team_id: ${{ secrets.DECKRUN_TEAM_ID }}
 
+      - name: Install deck with token and no team id
+        uses: ./
+        with:
+          token: ${{ secrets.DECKRUN_API_TOKEN }}
+
       - name: Verify installation
         run: deck version
 
