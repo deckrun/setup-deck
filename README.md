@@ -11,6 +11,7 @@ To install the latest version of `deck` and use it in GitHub Actions workflows, 
       uses: deckrun/setup-deck@v1
       with:
         token: ${{ secrets.DECKRUN_API_TOKEN }}
+        team_id: ${{ secrets.DECKRUN_TEAM_ID }}
 ```
 
 `deck` will now be available in the virtual environment and can be used directly in the following steps.
@@ -25,7 +26,8 @@ As an example, you could deploy the application using Deckrun:
 ### Arguments
 
 - `token` – (**Required**) A Deckrun API token
-- `version` – (Optional) The version of `deck` to install. If excluded, the latest release will be used.
+- `team_id` – (Optional) The ID of the team where you want to manage resources
+- `version` – (Optional) The version of `deck` to install. If excluded, the latest release will be used
 
 ## License
 

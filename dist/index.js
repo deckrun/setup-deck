@@ -34287,15 +34287,23 @@ Failed to retrieve latest version; falling back to: ${fallbackVersion}`);
 
     // Skip authentication if requested
     // for workflows where auth isn't necessary (e.g. deck app spec validate --schema-only)
-    var no_auth = core.getInput('no_auth');
-    if (no_auth.toLowerCase() === 'true') {
+    var noAuth = core.getInput('no_auth');
+    if (noAuth.toLowerCase() === 'true') {
       core.info('>>> Skipping deck auth');
       return;
     }
 
     var token = core.getInput('token', { required: true });
     core.setSecret(token);
-    await exec.exec('deck auth init -t', [token]);
+    var deckArgs = ['auth', 'init', '-t', token];
+
+    var teamId = core.getInput('team_id');
+    if (teamId) {
+      core.info(`>>> Using team ID: ${teamId}`);
+      deckArgs.push('--team', teamId);
+    }
+
+    await exec.exec('deck', deckArgs);
     core.info('>>> Successfully logged into deck');
   }
   catch (error) {

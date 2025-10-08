@@ -28,10 +28,11 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - name: Install deck
+      - name: Install deck with token and team id
         uses: ./
         with:
           token: ${{ secrets.DECKRUN_API_TOKEN }}
+          team_id: ${{ secrets.DECKRUN_TEAM_ID }}
 
       - name: Verify installation
         run: deck version
