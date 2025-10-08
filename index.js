@@ -4,7 +4,7 @@ const tc = require('@actions/tool-cache');
 const { Octokit } = require("@octokit/rest");
 
 const baseDownloadURL = "https://github.com/deckrun/deck-cli/releases/download";
-const fallbackVersion = "v0.1.8";
+const fallbackVersion = "v1";
 const octokit = new Octokit();
 
 async function downloadDoctl(version, type, architecture) {
