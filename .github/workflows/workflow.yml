@@ -44,3 +44,17 @@ jobs:
 
       - name: Verify log-in
         run: deck auth check
+
+  release:
+    runs-on: ubuntu-latest
+    needs: [lint, package_check, test]
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          generate_release_notes: true
