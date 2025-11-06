@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: Test, lint, and release GitHub Action
+name: Test and release GitHub Action
 
 jobs:
 
@@ -68,7 +68,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git push origin ${{ steps.tag_version.outputs.new_tag }}
+          git fetch --tags
           git tag -f v1.0 ${{ steps.tag_version.outputs.new_tag }}
           git push origin v1.0 --force
 
