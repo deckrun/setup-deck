@@ -50,6 +50,7 @@ jobs:
     needs: [lint, package_check, test]
     permissions:
       contents: write
+      actions: write
     steps:
       - uses: actions/checkout@master
 
@@ -65,4 +66,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git tag -f v1.0 ${{ github.ref_name }}
-          git push origin v1.0 --force
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git v1.0 --force
