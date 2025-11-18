@@ -34208,7 +34208,7 @@ const tc = __nccwpck_require__(3472);
 const { Octokit } = __nccwpck_require__(9380);
 
 const baseDownloadURL = "https://github.com/deckrun/deck-cli/releases/download";
-const fallbackVersion = "v1.0.5";
+const fallbackVersion = "v1.0.6";
 const octokit = new Octokit();
 
 async function downloadDoctl(version, type, architecture) {
