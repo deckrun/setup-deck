@@ -4,15 +4,40 @@ on:
       - main
 name: Test Pull Request
 
+permissions:
+  contents: write
+
 jobs:
 
+  rebuild-dependabot:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.head_ref }}
+
+      - run: npm install
+
+      - run: npm run package
+
+      - name: Commit updated dist/index.js
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dist/index.js
+          git diff --staged --quiet || git commit -m "Rebuild dist/index.js"
+          git push
+
   test-unit:
+    needs: rebuild-dependabot
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
       - run: npm test
 
   package_check:
+    needs: rebuild-dependabot
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -24,6 +49,7 @@ jobs:
             (echo -e "\nPlease run 'npm run package' and commit the results" && exit 1)
 
   test:
+    needs: rebuild-dependabot
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
