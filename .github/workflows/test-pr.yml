@@ -1,0 +1,49 @@
+on:
+  pull_request:
+    branches:
+      - main
+name: Test Pull Request
+
+jobs:
+
+  test-unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: npm test
+
+  package_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: "Ensure that code has been packaged and committed"
+        run: |-
+          npm install
+          npm run package
+          git diff --exit-code dist/index.js || \
+            (echo -e "\nPlease run 'npm run package' and commit the results" && exit 1)
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install deck with token and team id
+        uses: ./
+        with:
+          token: ${{ secrets.DECKRUN_API_TOKEN }}
+          team_id: ${{ secrets.DECKRUN_TEAM_ID }}
+
+      - name: Install deck with token and no team id
+        uses: ./
+        with:
+          token: ${{ secrets.DECKRUN_API_TOKEN }}
+
+      - name: Verify installation
+        run: deck version
+
+      - name: Verify log-in
+        run: deck auth check
