@@ -1,7 +1,7 @@
-const core = require('@actions/core');
-const exec = require('@actions/exec');
-const tc = require('@actions/tool-cache');
-const { Octokit } = require("@octokit/rest");
+import * as core from '@actions/core';
+import * as exec from '@actions/exec';
+import * as tc from '@actions/tool-cache';
+import { Octokit } from '@octokit/rest';
 
 const baseDownloadURL = "https://github.com/deckrun/deck-cli/releases/download";
 const fallbackVersion = "v1.0.6";

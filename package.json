@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Sets up Deckrun CLI in your GitHub Actions workflow.",
   "main": "index.js",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/deckrun/setup-deck.git"
@@ -17,9 +18,9 @@
   ],
   "author": "Daniel Vigueras",
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/exec": "^1.1.1",
-    "@actions/tool-cache": "^2.0.2",
+    "@actions/core": "^3.0.1",
+    "@actions/exec": "^3.0.0",
+    "@actions/tool-cache": "^4.0.0",
     "@octokit/rest": "^22.0.1"
   },
   "devDependencies": {
