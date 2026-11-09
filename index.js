@@ -4,7 +4,7 @@ import * as tc from '@actions/tool-cache';
 import { Octokit } from '@octokit/rest';
 
 const baseDownloadURL = "https://github.com/deckrun/deck-cli/releases/download";
-const fallbackVersion = "v1.0.6";
+const fallbackVersion = "v2.0.0";
 const octokit = new Octokit();
 
 async function downloadDoctl(version, type, architecture) {

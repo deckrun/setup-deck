@@ -38848,7 +38848,7 @@ const dist_src_Octokit = Octokit.plugin(requestLog, legacyRestEndpointMethods, p
 
 
 const baseDownloadURL = "https://github.com/deckrun/deck-cli/releases/download";
-const fallbackVersion = "v1.0.6";
+const fallbackVersion = "v2.0.0";
 const octokit = new dist_src_Octokit();
 
 async function downloadDoctl(version, type, architecture) {
